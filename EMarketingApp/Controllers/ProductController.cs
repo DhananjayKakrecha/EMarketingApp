@@ -217,5 +217,93 @@ namespace EMarketingApp.Controllers
 
             return View(products);
         }
+
+        // GET: Product/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Populate categories for the dropdown list
+            ViewBag.Categories = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);
+
+            return View(product);
+        }
+
+        // POST: Product/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Product model, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                var product = db.Products.Find(model.ProductId);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Update product fields
+                product.ProductName = model.ProductName;
+                product.Description = model.Description;
+                product.Price = model.Price;
+                product.EmailAddress = model.EmailAddress;
+                product.CategoryId = model.CategoryId;
+                product.DisplayUntil = model.DisplayUntil;
+
+                // Handle image upload (if a new image is provided)
+                if (file != null && file.ContentLength > 0)
+                {
+                    string fileName = Guid.NewGuid() + System.IO.Path.GetExtension(file.FileName);
+                    string path = Server.MapPath("~/Content/ProductImages/" + fileName);
+                    file.SaveAs(path);
+
+                    product.ProductImage = fileName; // Update the product image
+                }
+
+                db.SaveChanges();
+                return RedirectToAction("Dashboard", "Analyst");
+            }
+
+            // If validation fails, repopulate categories for dropdown
+            ViewBag.Categories = new SelectList(db.Categories, "CategoryId", "CategoryName", model.CategoryId);
+            return View(model);
+        }
+
+        // GET: Product/Delete/5
+        public ActionResult Delete(int id)
+        {
+            var product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (product != null)
+            {
+                db.Products.Remove(product);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Dashboard", "Analyst");
+        }
+
+        // POST: Product/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    var product = db.Products.Find(id);
+        //    if (product != null)
+        //    {
+        //        db.Products.Remove(product);
+        //        db.SaveChanges();
+        //    }
+
+        //    return RedirectToAction("Dashboard", "Analyst");
+        //}
     }
 }

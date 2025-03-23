@@ -38,6 +38,16 @@ namespace EMarketingApp.Controllers
             return View(admin);
         }
 
+        public ActionResult Logout()
+        {
+            // Clear the user session
+            Session.Clear();
+            Session.Abandon();
+
+            // Redirect to the login page (you can modify the route as needed)
+            return RedirectToAction("Index", "Home");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

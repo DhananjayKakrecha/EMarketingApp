@@ -16,7 +16,7 @@
                 <p class="card-text"><strong>Visible Until:</strong> @product.DisplayUntil?.ToString("dd MMM yyyy")</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a href="@Url.Action("Update", "Product", new { id = product.ProductId })" class="btn btn-sm btn-warning">Update</a>
+                        <a href="@Url.Action("Edit", "Product", new { id = product.ProductId })" class="btn btn-sm btn-warning">Update</a>
                         <a href="@Url.Action("Delete", "Product", new { id = product.ProductId })" class="btn btn-sm btn-danger">Delete</a>
                         <a href="@Url.Action("SetDisplay", "Product", new { id = product.ProductId })" class="btn btn-sm btn-info">Display</a>
                     </div>

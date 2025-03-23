@@ -1,0 +1,58 @@
+﻿@model EMarketingApp.Models.Product
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.ProductId)
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductName)
+        @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", placeholder = "Product Name" })
+        @Html.ValidationMessageFor(m => m.ProductName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", placeholder = "Product Description" })
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price, new { @class = "form-control", placeholder = "Price" })
+        @Html.ValidationMessageFor(m => m.Price)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CategoryId)
+        @Html.DropDownList("CategoryId", ViewBag.Categories as SelectList, "Choose Category", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CategoryId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmailAddress)
+        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", placeholder = "Email Address" })
+        @Html.ValidationMessageFor(m => m.EmailAddress)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DisplayUntil, "Display Until")
+        @Html.TextBoxFor(m => m.DisplayUntil, "{0:yyyy-MM-ddTHH:mm}", new { @type = "datetime-local", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DisplayUntil)
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Update Product Image (Optional)")
+        <input type="file" name="file" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="@Url.Action("Dashboard", "Analyst")" class="btn btn-secondary">Cancel</a>
+}
