@@ -7,20 +7,6 @@
     <link href="~/Content/site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">E-Marketing Admin</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Ranking", "Index", "Ranking")</li>
-                <li class="@(ViewBag.ActiveMenu == "Categories" ? "active" : "")">
-                    @Html.ActionLink("Categories", "Index", "Category")
-                </li>
-            </ul>
-        </div>
-    </nav>
-
     <div class="container body-content">
         @RenderBody()
         <hr />
