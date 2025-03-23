@@ -1,0 +1,26 @@
+﻿@model IEnumerable<EMarketingApp.Models.Product>
+
+@foreach (var product in Model)
+{
+    <div class="col-md-3 product-card">
+        <div class="card">
+            <img src="@Url.Content("~/Content/ProductImages/" + product.ProductImage)" alt="@product.ProductName" class="card-img-top" />
+            <div class="card-body">
+                <h5 class="card-title">@product.ProductName</h5>
+                <p>@product.Description</p>
+                <p><strong>Price:</strong> ₹@product.Price</p>
+                <p><strong>Visible Until:</strong> @product.DisplayUntil?.ToString("dd MMM yyyy")</p>
+
+                <!-- Like/Dislike buttons -->
+                <button class="btn btn-success btn-sm" onclick="voteProduct('@product.ProductId', 'Like')">Like</button>
+                <button class="btn btn-danger btn-sm" onclick="voteProduct('@product.ProductId', 'Dislike')">Dislike</button>
+
+                <!-- Feedback Form -->
+                <form action="@Url.Action("SubmitFeedback", "Marketer", new { productId = product.ProductId })" method="post">
+                    <textarea name="feedback" class="form-control" placeholder="Write feedback"></textarea>
+                    <button type="submit" class="btn btn-primary btn-sm">Submit Feedback</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}

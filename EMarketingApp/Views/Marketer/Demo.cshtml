@@ -1,0 +1,36 @@
+﻿@model EMarketingApp.Models.DemoPageViewModel
+
+<h2>Marketer Demo Page</h2>
+
+<!-- Categories Filter -->
+<div class="category-buttons">
+    @foreach (var category in Model.Categories)
+    {
+        <button class="btn btn-info" onclick="filterProducts(@category.CategoryId)">
+            @category.CategoryName
+        </button>
+    }
+</div>
+
+<!-- Products Grid -->
+<div id="productsGrid" class="row">
+    @Html.Partial("~/Views/Marketer/_ProductGrid.cshtml", Model.Products) <!-- Render products initially -->
+</div>
+
+@section Scripts {
+    <script>
+        function filterProducts(categoryId) {
+            // AJAX call to fetch filtered products
+            $.get('@Url.Action("FilterProducts", "Marketer")', { categoryId: categoryId }, function (data) {
+                $('#productsGrid').html(data); // Update products grid dynamically
+            });
+        }
+
+        function voteProduct(productId, action) {
+            // AJAX call for Like/Dislike
+            $.post('@Url.Action("Vote", "Marketer")', { productId: productId, action: action }, function (response) {
+                alert(response.message); // Display response message
+            });
+        }
+    </script>
+}

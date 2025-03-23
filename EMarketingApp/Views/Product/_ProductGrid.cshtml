@@ -1,0 +1,22 @@
+﻿@model IEnumerable<EMarketingApp.Models.Product>
+
+@foreach (var product in Model)
+{
+    <div class="col-md-3 product-card">
+        <div class="card">
+            <img src="@Url.Content("~/Content/ProductImages/" + product.ProductImage)" alt="@product.ProductName" class="card-img-top" />
+            <div class="card-body">
+                <h5 class="card-title">@product.ProductName</h5>
+                <p class="card-text">@product.Description</p>
+                <p class="card-text"><strong>Price:</strong> ₹@product.Price</p>
+                <p class="card-text"><strong>Email:</strong> @product.EmailAddress</p>
+                <p class="card-text"><strong>Visible Until:</strong> @product.DisplayUntil?.ToString("dd MMM yyyy")</p>
+                <div class="card-actions">
+                    <a href="@Url.Action("Update", "Product", new { id = product.ProductId })" class="btn btn-warning btn-sm">Update</a>
+                    <a href="@Url.Action("Delete", "Product", new { id = product.ProductId })" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="@Url.Action("SetDisplay", "Product", new { id = product.ProductId })" class="btn btn-info btn-sm">Display</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

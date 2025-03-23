@@ -1,0 +1,28 @@
+﻿@model IEnumerable<EMarketingApp.Models.Product>
+
+@{
+    ViewBag.Title = "Main Site Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Products on Main Site</h2>
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-3 product-card">
+            <div class="card">
+                <img src="@Url.Content("~/Content/ProductImages/" + product.ProductImage)" alt="@product.ProductName" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">@product.ProductName</h5>
+                    <p><strong>Likes:</strong> @product.Likes</p>
+
+                    <a href="@Url.Action("Details", "Product", new { id = product.ProductId })" class="btn btn-primary">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    }
+</div>

@@ -1,0 +1,25 @@
+﻿@model EMarketingApp.Models.Analyst
+
+@{
+    ViewBag.Title = "Analyst Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Analyst Login</h2>
+@using (Html.BeginForm("Login", "Analyst", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Username)
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Enter username" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter password" })
+    </div>
+    <button type="submit" class="btn btn-success">Login</button>
+}
+
+<p class="text-center" style="margin-top: 20px;">
+    <a href="@Url.Action("Signup", "Analyst")">Not signed up? Register here.</a>
+</p>

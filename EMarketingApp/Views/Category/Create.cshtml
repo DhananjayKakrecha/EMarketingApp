@@ -1,0 +1,61 @@
+﻿@model EMarketingApp.Models.Category
+
+@{
+    ViewBag.Title = "Add New Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Navigation Buttons -->
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">E-Marketing Admin</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="@Url.Action("Index", "Ranking")">Ranking</a>
+            </li>
+            <li class="active">
+                <a href="@Url.Action("Index", "Category")">Categories</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Add New Category</h2>
+
+    @using (Html.BeginForm("Create", "Category", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control", placeholder = "Enter category name" })
+                @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Category Image", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="file" id="file" class="form-control" />
+                @* If needed, add client-side validations *@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create Category" class="btn btn-success" />
+                @Html.ActionLink("Cancel", "Index", "Category", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

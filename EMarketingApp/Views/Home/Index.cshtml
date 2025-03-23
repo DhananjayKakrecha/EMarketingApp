@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Welcome to E-Marketing System</h2>
+<p class="text-center">Please choose your login option:</p>
+
+<div class="text-center">
+    <a href="@Url.Action("Login", "Admin")" class="btn btn-primary btn-lg" style="margin-right: 20px;">Admin Login</a>
+    <a href="@Url.Action("Login", "Analyst")" class="btn btn-success btn-lg">Analyst Login</a>
+</div>

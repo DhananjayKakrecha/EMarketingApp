@@ -1,0 +1,49 @@
+﻿@model EMarketingApp.Models.DashboardViewModel
+
+<h2>Analyst Dashboard</h2>
+<a href="@Url.Action("Ranking", "Product")" class="btn btn-success btn-lg">Analyst Login</a>
+<!-- Categories Filter -->
+<div>
+    @foreach (var category in Model.Categories)
+    {
+        <button class="btn btn-info" onclick="filterProducts(@category.CategoryId)">@category.CategoryName</button>
+    }
+</div>
+
+<!-- Add New Product -->
+<div>
+    <a href="@Url.Action("Create", "Product")" class="btn btn-success">Add New Product</a>
+</div>
+
+<!-- Products Grid -->
+<div id="productsGrid" class="row">
+    <!--
+    @foreach (var product in Model.Products)
+    {
+        <div class="col-md-3 product-card">
+            <div class="card">
+                <img src="@Url.Content("~/Content/ProductImages/" + product.ProductImage)" alt="@product.ProductName" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">@product.ProductName</h5>
+                    <p class="card-text">@product.Description</p>
+                    <p class="card-text"><strong>Price:</strong> ₹@product.Price</p>
+                    <p class="card-text"><strong>Visible Until:</strong> @product.DisplayUntil?.ToString("dd MMM yyyy")</p>
+                    <p class="card-text"><strong>Email:</strong> @product.EmailAddress</p>
+                </div>
+            </div>
+        </div>
+    }
+    -->
+    @Html.Partial("~/Views/Product/_ProductGrid.cshtml", Model.Products)
+</div>
+
+@section Scripts {
+    <script>
+        function filterProducts(categoryId) {
+            // Make an AJAX call to fetch filtered products
+            $.get('@Url.Action("FilterProducts", "Product")', { categoryId: categoryId }, function (data) {
+                $('#productsGrid').html(data); // Replace the product grid with filtered results
+            });
+        }
+    </script>
+}

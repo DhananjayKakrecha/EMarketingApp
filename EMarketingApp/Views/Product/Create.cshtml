@@ -1,0 +1,53 @@
+﻿@model EMarketingApp.Models.Product
+
+@{
+    ViewBag.Title = "Add New Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add New Product</h2>
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductName, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", placeholder = "Enter product name" })
+        @Html.ValidationMessageFor(m => m.ProductName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", placeholder = "Enter product description" })
+        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Price, new { @class = "form-control", placeholder = "Enter product price" })
+        @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmailAddress, "Email Address", new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", placeholder = "Enter email address" })
+        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CategoryId, "Select Category", new { @class = "control-label" })
+        @Html.DropDownList("CategoryId", ViewBag.Categories as SelectList, "Choose a category", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Product Image", new { @class = "control-label" })
+        <input type="file" name="file" class="form-control" />
+    </div>
+
+    <div class="form-group text-center">
+        <input type="submit" value="Add Product" class="btn btn-primary" />
+        <a href="@Url.Action("Dashboard", "Analyst")" class="btn btn-secondary">Cancel</a>
+    </div>
+}

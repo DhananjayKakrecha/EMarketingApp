@@ -1,0 +1,64 @@
+﻿@model IEnumerable<EMarketingApp.Models.Category>
+
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Top Navigation Buttons -->
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">E-Marketing Admin</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li>
+                @* Placeholder for Ranking functionality *@
+                <a href="@Url.Action("Index", "Ranking")">Ranking</a>
+            </li>
+            <li class="active">
+                <a href="@Url.Action("Index", "Category")">Categories</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Categories</h2>
+    <p>
+        <a class="btn btn-primary" href="@Url.Action("Create", "Category")">
+            <span class="glyphicon glyphicon-plus"></span> Add New Category
+        </a>
+    </p>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Category Name</th>
+                <th>Image</th>
+                <th style="width:120px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cat in Model)
+            {
+                <tr>
+                    <td>@cat.CategoryName</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(cat.Cat_Image))
+                        {
+                            <img src="@Url.Content("~/Content/CategoryImages/" + cat.Cat_Image)" alt="@cat.CategoryName" style="height:60px;" />
+                        }
+                        else
+                        {
+                            <span>No Image</span>
+                        }
+                    </td>
+                    <td>
+                        @* Remove button: It may lead to a deletion confirmation page *@
+                        @Html.ActionLink("Remove", "Delete", new { id = cat.CategoryId }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,25 @@
+﻿@model EMarketingApp.Models.Product
+
+@{
+    ViewBag.Title = "Set Product Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Set Product Display Visibility</h2>
+<p>Product Name: @Model.ProductName</p>
+
+@using (Html.BeginForm("SetDisplay", "Product", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ProductId)
+
+    <div class="form-group">
+        <label for="displayUntil">Visibility End Date/Time:</label>
+        <input type="datetime-local" id="displayUntil" name="displayUntil" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="@Url.Action("Dashboard", "Analyst")" class="btn btn-secondary">Cancel</a>
+    </div>
+}
