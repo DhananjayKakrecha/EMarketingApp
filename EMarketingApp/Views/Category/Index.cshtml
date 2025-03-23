@@ -2,26 +2,8 @@
 
 @{
     ViewBag.Title = "Categories";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- Top Navigation Buttons -->
-<div class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">E-Marketing Admin</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li>
-                @* Placeholder for Ranking functionality *@
-                <a href="@Url.Action("Index", "Ranking")">Ranking</a>
-            </li>
-            <li class="active">
-                <a href="@Url.Action("Index", "Category")">Categories</a>
-            </li>
-        </ul>
-    </div>
-</div>
 
 <div class="container">
     <h2>Categories</h2>
