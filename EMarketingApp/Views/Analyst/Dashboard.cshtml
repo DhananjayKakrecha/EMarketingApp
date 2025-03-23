@@ -46,6 +46,16 @@
                 <ul class="nav">
                     <!-- Example Nav Item 1 -->
 
+                    <li class="nav-item text-center mx-3">
+                        <img src="~/Content/all2.jpeg"
+                             alt="Kids"
+                             class="d-block mx-auto rounded-circle"
+                             style="width: 60px; height: 60px; object-fit: cover;" />
+                        <span class="d-block mt-1" style="color:black">
+                            <a href="@Url.Action("Dashboard", "Analyst")" class="nav-link px-2 link-secondary">All</a>
+                        </span>
+                    </li>
+
                     @foreach (var category in Model.Categories)
                     {
                         <li class="nav-item text-center mx-3">
