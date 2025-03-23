@@ -2,27 +2,79 @@
 
 @{
     ViewBag.Title = "Main Site Products";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Products on Main Site</h2>
-
-<div class="row">
-    @foreach (var product in Model)
-    {
-        <div class="col-md-3 product-card">
-            <div class="card">
-                <img src="@Url.Content("~/Content/ProductImages/" + product.ProductImage)" alt="@product.ProductName" class="card-img-top" />
-                <div class="card-body">
-                    <h5 class="card-title">@product.ProductName</h5>
-                    <p><strong>Likes:</strong> @product.Likes</p>
-
-                    <a href="@Url.Action("Details", "Product", new { id = product.ProductId })" class="btn btn-primary">
-                        View Details
-                    </a>
-                </div>
-            </div>
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 mb-2 mb-md-0">
+            <a href="#"
+               class="d-inline-flex link-body-emphasis text-decoration-none">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="40"
+                     height="32"
+                     fill="none"
+                     stroke="black"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     stroke-width="2"
+                     class="d-block mb-2"
+                     role="img"
+                     viewBox="0 0 24 24">
+                    <title>Product</title>
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"></path>
+                </svg>
+                <span class="fs-4 ms-2" style="color:black;">Markit-Up</span>
+            </a>
         </div>
-    }
-    }
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="@Url.Action("Dashboard","Analyst")" class="nav-link px-2 link-secondary">Home</a></li>
+            <li><a href="@Url.Action("Ranking", "Product")" class="nav-link px-2 link-secondary">Rankings</a></li>
+            <li><a href="@Url.Action("MainSiteProducts", "Product")" class="nav-link px-2">Rankings</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-outline-primary me-2">
+                Log Out
+            </button>
+        </div>
+    </header>
+</div>
+
+<div class="container">
+    <nav class="navbar navbar-light bg-body-primary">
+        <div class="container d-flex justify-content-center border-bottom">
+            Main Site Products!
+        </div>
+    </nav>
+</div>
+
+
+<div class="album py-5 bg-body-primary">
+    <div class="container">
+        <div id="productsGrid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (var product in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="@Url.Content("~/Content/ProductImages/" + product.ProductImage)"
+                             class="card-img-top"
+                             alt="Thumbnail"
+                             style="width: 100%; height: 225px; object-fit: cover" />
+                        <div class="card-body">
+                            <h5 class="card-title">@product.ProductName</h5>
+                            <p class="card-text"><strong>Likes:</strong> @product.Likes</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="@Url.Action("Details", "Product", new { id = product.ProductId })" class="btn btn-sm btn-primary">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
 </div>

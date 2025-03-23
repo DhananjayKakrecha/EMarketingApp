@@ -99,6 +99,8 @@ namespace EMarketingApp.Controllers
                 }
 
                 // Save the product in the database
+                model.Likes = 0;
+                model.Dislikes = 0;
                 db.Products.Add(model);
                 db.SaveChanges();
 

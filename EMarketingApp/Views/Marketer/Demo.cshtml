@@ -1,20 +1,75 @@
 ﻿@model EMarketingApp.Models.DemoPageViewModel
 
-<h2>Marketer Demo Page</h2>
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 mb-2 mb-md-0">
+            <a href="#"
+               class="d-inline-flex link-body-emphasis text-decoration-none">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="40"
+                     height="32"
+                     fill="none"
+                     stroke="black"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     stroke-width="2"
+                     class="d-block mb-2"
+                     role="img"
+                     viewBox="0 0 24 24">
+                    <title>Product</title>
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"></path>
+                </svg>
+                <span class="fs-4 ms-2" style="color:black;">Markit-Up</span>
+            </a>
+        </div>
 
-<!-- Categories Filter -->
-<div class="category-buttons">
-    @foreach (var category in Model.Categories)
-    {
-        <button class="btn btn-info" onclick="filterProducts(@category.CategoryId)">
-            @category.CategoryName
-        </button>
-    }
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2">Home</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-outline-primary me-2">
+                Log Out
+            </button>
+        </div>
+    </header>
 </div>
 
-<!-- Products Grid -->
-<div id="productsGrid" class="row">
-    @Html.Partial("~/Views/Marketer/_ProductGrid.cshtml", Model.Products) <!-- Render products initially -->
+<!-- Categories Filter -->
+<div class="container">
+    <nav class="navbar navbar-light bg-body-primary">
+        <div class="container d-flex justify-content-center border-bottom">
+            <ul class="nav">
+                <!-- Example Nav Item 1 -->
+
+                @foreach (var category in Model.Categories)
+                {
+                    <li class="nav-item text-center mx-3">
+                        <img src="@Url.Content("~/Content/CategoryImages/" + category.Cat_Image)"
+                             alt="Kids"
+                             class="d-block mx-auto rounded-circle"
+                             style="width: 60px; height: 60px; object-fit: cover;" />
+                        <span class="d-block mt-1" style="color:black">
+                            <button class="btn btn-info" style="border: none; background: none; color: inherit; cursor: pointer;" onclick="filterProducts(@category.CategoryId)">
+                                @category.CategoryName
+                            </button>
+                        </span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+
+<div class="album py-5 bg-body-primary">
+    <div class="container">
+        <div id="productsGrid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @Html.Partial("~/Views/Marketer/_ProductGrid.cshtml", Model.Products)
+        </div>
+    </div>
 </div>
 
 @section Scripts {
